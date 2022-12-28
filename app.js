@@ -6,7 +6,8 @@ const {
   pausa,
   leerInput,
   listadoTareasBorrar,
-  confirmar
+  confirmar,
+  mostrarListadoChecklist
 } = require('./helpers/inquirer');
 
 const Tareas = require('./models/tareas');
@@ -39,7 +40,8 @@ const main = async() => {
         tareas.listarPendientesCompletadas(false)
       break
       case '5':
-        console.log('Opcion 5')
+        const ids = await mostrarListadoChecklist(tareas.listadoArr)
+        tareas.toggleCompletadas(ids)
       break
       case '6':
         const id = await listadoTareasBorrar(tareas.listadoArr)

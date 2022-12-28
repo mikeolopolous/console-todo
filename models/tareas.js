@@ -55,7 +55,7 @@ class Tareas {
         const {desc, fechaCompletado} = tarea
         const fecha = `${fechaCompletado}`.green
 
-        console.log(`${indice} ${desc} :: ${fecha}`)
+        console.log(`${indice} ${desc} :: ${fecha.green}`)
       })
     }
 
@@ -70,6 +70,21 @@ class Tareas {
         console.log(`${indice} ${desc} :: ${fechaCompletado}`)
       })
     }
+  }
+
+  toggleCompletadas( ids = [] ) {
+    ids.forEach(id => {
+      const tarea = this._listado[id]
+      if ( !tarea.fechaCompletado ) {
+        tarea.fechaCompletado = new Date().toISOString()
+      }
+    })
+
+    this.listadoArr.forEach( tarea => {
+      if ( !ids.includes(tarea.id) ) {
+        this._listado[tarea.id].fechaCompletado = null
+      }
+    })
   }
 }
 
